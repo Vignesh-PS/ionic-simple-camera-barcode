@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons class="back-button" slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">QRCode Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>All codes</h2>
+
+  <ion-list *ngIf="allCodes.length>0" class="code-list">
+    <ion-item *ngFor="let code of allCodes">
+      <ion-thumbnail>
+        <ion-icon name="barcode-outline" color="primary"></ion-icon>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{code.code}}</h3>
+        <span>{{code.time | date: 'medium'}}</span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="allCodes.length===0" class="ion-text-center">
+    <img class="not-found-img" src="assets/images/empty.png">
+    <p class="ion-margin-top">No codes found</p>
+  </div>
+
+
+</ion-content>

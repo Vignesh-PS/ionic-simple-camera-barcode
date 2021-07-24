@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start" class="back-button">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Captured Images</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h2>All Images</h2>
+
+  <ion-list>
+
+    <ion-row *ngIf="allImages.length>0">
+      <ion-col size="6" *ngFor="let image of allImages" class="image-list">
+        <img [src]="image.image">
+        <p>Captured on {{image.time | date: 'medium'}}</p>
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
+
+  <div *ngIf="allImages.length===0" class="ion-text-center">
+    <img class="not-found-img" src="assets/images/empty.png">
+    <p class="ion-margin-top">No images found</p>
+  </div>
+
+
+</ion-content>

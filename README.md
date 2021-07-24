@@ -1,0 +1,1 @@
+# ionic-simple-camera-barcode

@@ -1,0 +1,24 @@
+.not-found-img {
+  width: 100%;
+}
+
+.code-list {
+  ion-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    ion-icon {
+      font-size: 2rem;
+    }
+  }
+  h3 {
+    font-size: 1.3rem;
+    color: #6d6d6d;
+    white-space: normal;
+  }
+
+  span {
+    color: #808080;
+    font-size: 0.8rem;
+  }
+}

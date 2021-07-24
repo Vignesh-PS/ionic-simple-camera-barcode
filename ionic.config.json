@@ -1,5 +1,7 @@
 {
   "name": "simple-camera-barcode",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

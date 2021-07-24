@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { CameraService } from './camera-service.service';
+import { QrcodeService } from './qrcode-service.service';
 
 
 @NgModule({
@@ -14,6 +16,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [CameraService, QrcodeService]
 })
 export class HomePageModule {}
