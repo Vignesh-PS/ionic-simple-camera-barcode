@@ -5,6 +5,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Decoder } from '@nuintun/qrcode';
 import { File } from '@ionic-native/file/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { ToastController } from '@ionic/angular';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 // declare let QRCode: any;
@@ -18,8 +20,27 @@ export class QrcodeService {
     private barcodeScanner: BarcodeScanner,
     private camera: Camera,
     private web: WebView,
-    private file: File
+    private file: File,
+    private filePath: FilePath,
+    private toast: ToastController
   ) {}
+
+  async presentToast(msg: string) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 4500,
+      position: 'bottom',
+      cssClass: 'toaster-common',
+      animated: true,
+      buttons: [
+        {
+          text: 'X',
+          role: 'cancel',
+        },
+      ],
+    });
+    toast.present();
+  }
 
   readFromCamera() {
     this.barcodeScanner
@@ -52,10 +73,21 @@ export class QrcodeService {
       .getPicture(options)
       .then((imageUri) => {
         console.log('imageUri :>> ', imageUri);
-        this.relocateGallerFile('file://'+imageUri);
+         //Check is it a native path or not
+      if(imageUri.indexOf('file://')===-1){
+        imageUri=`file://${imageUri}`;
+      }
+        this.filePath.resolveNativePath(imageUri).then(file=>{
+          console.log('fileUrl :>> ', file);
+          this.relocateGallerFile(file);
+        })
+        .catch(err=>{
+          console.log('err filePath :>> ', err);
+          this.presentToast('Service not available');
+        });
       })
       .catch((err) => {
-        alert('Service not available');
+        this.presentToast('Service not available');
       });
   }
 
@@ -88,7 +120,7 @@ export class QrcodeService {
           this.saveCodesLocal(code);
         })
         .catch((error) => {
-          alert('Choose valid QR image');
+          this.presentToast('Service not available');
           console.error(error);
         });
       })

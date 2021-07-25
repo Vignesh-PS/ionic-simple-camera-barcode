@@ -28,3 +28,16 @@
 .back-button{
   position: absolute;
 }
+
+.toaster-common{
+  --background: #808000;
+  --color: #fff;
+  .toast-container{
+      background: #808000;
+      border-radius: 6px;
+  }
+  .toast-button-inner{
+  --color: #fff;
+      color: #fff;
+  }
+}
